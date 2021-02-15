@@ -1,0 +1,56 @@
+---
+title: "clean"
+author: "Joshua Berry"
+date: "2/15/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(GGally)
+library(knitr)
+library(gtsummary)
+library(gt)
+library(rstatix)
+```
+
+## R Markdown
+
+```{r}
+results <- read_csv("china_watch_combined.csv",
+                    col_types = cols(Q17_1 = col_number(),
+                                     Q18_1 = col_number(),
+                                     Q19_1 = col_number(),
+                                     Q22_1 = col_number(),
+                                     Q40_1 = col_number(),
+                                     Q41_1 = col_number(),
+                                     Age = col_number()))
+
+clean_results <- results %>%
+  rename(race = Q92_1, ethnicity = Q92_2) %>%
+   mutate(Q20 = case_when(Q20 == "Critical threat" ~ 2,
+                                     Q20 == "Important but not critical threat" ~ 1,
+                                     Q20 == "Not an important threat at all" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+     mutate(Q21_1 = case_when(Q21_1 == "Support" ~ 1,
+                                     Q21_1 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q21_2 = case_when(Q21_2 == "Support" ~ 1,
+                                     Q21_2 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q21_3 = case_when(Q21_3 == "Support" ~ 1,
+                                     Q21_3 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q21_4 = case_when(Q21_4 == "Support" ~ 1,
+                                     Q21_4 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+     mutate(Q21_5 = case_when(Q21_5 == "Support" ~ 1,
+                                     Q21_5 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+     mutate(Q21_6 = case_when(Q21_6 == "Support" ~ 1,
+                                     Q21_6 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_))
+```
+
+

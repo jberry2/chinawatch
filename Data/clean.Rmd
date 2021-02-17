@@ -81,6 +81,14 @@ clean_results <- results %>%
                                      Q44 == "Very well" ~ 4,
                                      Q44 == "Extremely well" ~ 5,
                                      TRUE ~ NA_real_)) %>%
+   rename(mediatrust = Q27, newsinterest = Q26, time_spent_news = Q25, newsconspiracy = Q44, newssource = Q43) %>%
+           mutate(newssource = case_when(newssource == "Cable TV news broadcasts (For example: CNN, Fox News, or MSNBC)" ~ "Cable TV",
+                                     newssource == "Blogs and other websites" ~ "Blogs and websites",
+                                     newssource == "Facebook, Twitter and other social media" ~ "Social media",
+                                     newssource == "Network TV news broadcasts (For example: ABC, CBS, or NBC)" ~ "Network TV",
+                                     newssource == "Newspapers and news magazines" ~ "Newspapers and news magazines",
+                                     newssource == "Radio" ~ "Radio",
+                                     TRUE ~ NA_character_)) %>%
         mutate(Q34 = case_when(Q34 == "Not sure" ~ 0,
                                      Q34 == "More likely to support China" ~ -1,
                                      Q34 == "More likely to support the U.S." ~ 1,
@@ -141,7 +149,153 @@ clean_results <- results %>%
                                      Salary == "$50,000 to $74,999" ~ 74999,
                                      Salary == "Less than $10,000" ~ 10000,
                                      Salary == "$75,000 to $99,999" ~ 99999,
-                                     TRUE ~ NA_real_))
+                                     TRUE ~ NA_real_)) %>%
+                     mutate(race = case_when(race == "Asian" ~ "Asian",
+                                     race == "Black" ~ "Black",
+                                     race == "Hispanic" ~ "Hispanic",
+                                     race == "Hispanic or Latino" ~ "Hispanic",
+                                     race == "Other" ~ "Other",
+                                     race == "White" ~ "White",
+                                     race == "White,Asian" ~ "Other",
+                                     race == "White,Black,Asian" ~ "Other",
+                                     TRUE ~ NA_character_)) 
+
+clean_results$condition <- factor(clean_results$condition, levels = c("peoplesdaily", "nytbase", "nytcw", "foxcw", "facebookcw"))
+
+clean_results$race<- factor(clean_results$race, levels = c("Black", "Asian", "White", "Hispanic", "Other"))
+
+clean_results$xicondition <- factor(clean_results$xicondition, levels = c("party", "children"))
+
+mean(clean_results$Age, na.rm = TRUE)
 ```
 
+
+```{r}
+china.fav.lm <- lm(Q17_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.fav.lm)
+
+china.fav.tbl <-  tbl_regression(china.fav.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 1: Regression of China Watch Treatment Group Against Favorability Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+
+china.fav.lm.news <- lm(Q17_1 ~ Gender + Age + race + Education 
+                + Party + condition + mediatrust + newsinterest + time_spent_news
+                + newsconspiracy + newssource, data = clean_results)
+
+summary(china.fav.lm.news)
+
+china.fav.news.tbl <-  tbl_regression(china.fav.lm.news, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 1a: Regression of China Watch Treatment Group and Media Interaction Against Favorability Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+china.ppl.lm <- lm(Q22_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.ppl.lm)
+
+china.ppl.tbl <-  tbl_regression(china.ppl.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 2: Regression of China Watch Treatment Group Against Favorability Towards Chinese Citizens", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+china.trust.lm <- lm(Q18_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.trust.lm)
+
+china.trust.tbl <-  tbl_regression(china.trust.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Trust Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+
+
+```
+
+```{r}
+china.trust.lm <- lm(Q18_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.trust.lm)
+
+china.trust.tbl <-  tbl_regression(china.trust.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Trust Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+china.influence.lm <- lm(Q19_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.influence.lm)
+
+china.influence.tbl <-  tbl_regression(china.influence.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 4: Regression of China Watch Treatment Group Against Influence Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+china.threat.lm <- lm(Q20 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.threat.lm)
+
+china.threat.tbl <-  tbl_regression(china.threat.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 5: Regression of China Watch Treatment Group Against Belief that China is a Threat", 
+  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+article.trust.lm <- lm(Q40_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(article.trust.lm)
+
+article.trust.tbl <-  tbl_regression(article.trust.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 6: Regression of China Watch Treatment Group Against Trust Towards Treatment Article", 
+  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+article.convincing.lm <- lm(Q41_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(article.convincing.lm)
+
+article.convincing.tbl <-  tbl_regression(article.convincing.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 7: Regression of China Watch Treatment Group Against Convincement Towards Treatment Article", 
+  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+
+china.trade.glm <- lm(Q21_1 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.trade.glm)
+
+china.trade.tbl <-  tbl_regression(china.trade.glm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 8: Regression of China Watch Treatment Group Against Trade Policy Preference", 
+  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+```
 

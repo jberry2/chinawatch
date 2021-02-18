@@ -289,7 +289,7 @@ article.convincing.tbl <-  tbl_regression(article.convincing.lm, intercept = TRU
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
   tab_header(title = "Tbl. 7: Regression of China Watch Treatment Group Against 
-             How Convinced Participants were of their Treatment Article", 
+             How Convinced Participants were by their Treatment Article", 
   subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
@@ -372,21 +372,6 @@ china.military.glm <- lm(Q21_6 ~ Gender + Age + race + Education
 summary(china.military.glm)
 
 
-
-source_id_graph <- clean_results %>%
-  filter(Q39 %in% c("China Daily", "Fox News", "Not sure", "The New York Times", "People.cn (China's People's Daily)", "Facebook News")) %>%
-ggplot(aes(x = Q39, fill = condition)) +
-  geom_bar(na.rm = TRUE) +
-  scale_fill_discrete(name = "Treatment", labels = c("People's Daily", "NYT Base",
-                         "NYT CW", "Fox CW", "Facebook CW")) +
-  scale_x_discrete(labels=c("China Daily", "Fox News",
-                         "Not sure", "People's Daily", "New York Times")) +
-  labs(title = "Participant Identification of Authoring Media Source",
-       subtitle = "Legend indicates the treatment participants actually received; CW = China Watch treatment",
-       x = "Participants' Source ID",
-       y = "Count",
-       source = "Original DLABBS & MTurk study, conducted 2021 Feb. 1-20, n = yyy") +
-  theme_bw()
 ```
 
 
@@ -399,7 +384,8 @@ summary(chineseamericans.economic.lm)
 chineseamericans.economic.tbl <-  tbl_regression(chineseamericans.economic.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 10: Regression of Xi Quote Treatment Against Economic Threat posed by Chinese Americans", 
+  tab_header(title = "Tbl. 10: Regression of Xi Quote Treatment Against 
+             Perceived Economic Threat of Chinese American Fifth Column", 
   subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
   to 1 (Chinese Americans are more likely to support the U.S.)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
@@ -412,7 +398,8 @@ summary(chineseamericans.military.lm)
 chineseamericans.military.tbl <-  tbl_regression(chineseamericans.military.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 11: Regression of Xi Quote Treatment Against Military Threat posed by Chinese Americans", 
+  tab_header(title = "Tbl. 11: Regression of Xi Quote Treatment Against 
+             Perceived Military Threat of Chinese American Fifth Column", 
   subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
   to 1 (Chinese Americans are more likely to support the U.S.)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
@@ -435,5 +422,257 @@ chineseamericans.securityrisk.lm <- lm(Q35 ~ Gender + Age + race + Education
 
 summary(chineseamericans.securityrisk.lm)
 
+```
+
+```{r}
+source_id_graph <- clean_results %>%
+  filter(Q39 %in% c("China Daily", "Fox News", "Not sure", "The New York Times", "People.cn (China's People's Daily)", "Facebook News")) %>%
+ggplot(aes(x = Q39, fill = condition)) +
+  geom_bar(na.rm = TRUE) +
+  scale_fill_discrete(name = "Treatment", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("China Daily", "Fox News",
+                         "Not sure", "People's Daily", "New York Times")) +
+  labs(title = "Participant Identification of Authoring Media Source",
+       subtitle = "Legend indicates the treatment participants actually received; CW = China Watch treatment",
+       x = "Participants' Source ID",
+       y = "Count",
+       source = "Original DLABBS & MTurk study, conducted 2021 Feb. 1-20, n = yyy") +
+  theme_bw()
+
+mean_china_fav <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_fav = mean(Q17_1, na.rm = TRUE),
+            sd = sd(Q17_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_fav - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_fav + qt(1 - (0.05 / 2), n - 1) * se)
+
+
+china_fav_graph <-
+  mean_china_fav %>%
+ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 100) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 1: The Effect of Media Treatment on Favorability Towards China",
+       subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
+       x = "Treatment Group",
+       y = "Mean Favorability towards China",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
+
+mean_china_ppl_fav <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_ppl_fav = mean(Q22_1, na.rm = TRUE),
+            sd = sd(Q22_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_ppl_fav - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_ppl_fav + qt(1 - (0.05 / 2), n - 1) * se)
+
+china_fav_ppl_graph <-
+  mean_china_ppl_fav %>%
+ggplot(aes(x = condition, y = mean_china_ppl_fav, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 100) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 2: The Effect of Media Treatment on Favorability Towards Chinese People",
+       subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
+       x = "Treatment Group",
+       y = "Mean Favorability towards Chinese People",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
+```
+
+```{r}
+mean_china_trust_fav <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_trust_fav = mean(Q18_1, na.rm = TRUE),
+            sd = sd(Q18_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_trust_fav - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_trust_fav + qt(1 - (0.05 / 2), n - 1) * se)
+
+china_trust_graph <-
+  mean_china_trust_fav %>%
+ggplot(aes(x = condition, y = mean_china_trust_fav, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 7) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 3: The Effect of Media Treatment on Perceived Trust of China",
+       subtitle = "Scale of 1 (Untrustworthy) to 7 (Trustworthy)",
+       x = "Treatment Group",
+       y = "Mean Trust",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
+
+mean_china_influence <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_influence = mean(Q19_1, na.rm = TRUE),
+            sd = sd(Q19_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_influence - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_influence + qt(1 - (0.05 / 2), n - 1) * se)
+
+china_influence_graph <-
+  mean_china_influence %>%
+ggplot(aes(x = condition, y = mean_china_influence, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 10) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 4: The Effect of Media Treatment on Perceived Influence of China",
+       subtitle = "Scale of 0 (Not at all influential) to 10 (Extremly influential)",
+       x = "Treatment Group",
+       y = "Mean Influence Rating",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
+```
+
+```{r}
+mean_china_threat <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_threat = mean(Q20, na.rm = TRUE),
+            sd = sd(Q20, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_threat - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_threat + qt(1 - (0.05 / 2), n - 1) * se)
+
+china_threat_graph <-
+  mean_china_threat %>%
+ggplot(aes(x = condition, y = mean_china_threat, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 2) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 5: The Effect of Media Treatment on Belief that China is a 
+             Threat to the United States",
+       subtitle = "Scale of 0 (Not an important threat at all) to 2 (Critical threat)",
+       x = "Treatment Group",
+       y = "Mean Threat Rating",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
+
+mean_article_trust <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_article_trust = mean(Q40_1, na.rm = TRUE),
+            sd = sd(Q40_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_article_trust - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_article_trust + qt(1 - (0.05 / 2), n - 1) * se)
+
+article_trust_graph <-
+  mean_article_trust %>%
+ggplot(aes(x = condition, y = mean_article_trust, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 7) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 6: The Effect of Media Treatment on Trust in Accuracy of Treatment Article",
+       subtitle = "Scale of 1 (No trust) to 7 (Complete trust)",
+       x = "Treatment Group",
+       y = "Mean Trust",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
+
+mean_article_convince <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_article_convince = mean(Q41_1, na.rm = TRUE),
+            sd = sd(Q41_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_article_convince - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_article_convince + qt(1 - (0.05 / 2), n - 1) * se)
+
+article_convince_graph <-
+  mean_article_convince %>%
+ggplot(aes(x = condition, y = mean_article_convince, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 7) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 6: The Effect of Media Treatment on 
+       How Convinced Participants were by their Treatment Article",
+       subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)",
+       x = "Treatment Group",
+       y = "Mean Convincement",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
+```
+
+```{r}
+mean_chineseamerican_military <-
+  clean_results %>%
+  group_by(condition) %>%
+  summarize(mean_chineseamerican_military = mean(Q42, na.rm = TRUE),
+            sd = sd(Q42, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_chineseamerican_military - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_chineseamerican_military + qt(1 - (0.05 / 2), n - 1) * se)
+
+chineseamerican_military_graph <-
+  mean_chineseamerican_military %>%
+ggplot(aes(x = condition, y = mean_chineseamerican_military, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(-1, 1) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 7: The Effect of Media Treatment on 
+       Perceived Military Threat of Chinese American Fifth Column",
+       subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
+  to 1 (Chinese Americans are more likely to support the U.S.)",
+       x = "Treatment Group",
+       y = "Mean Rating",
+       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+  theme_bw()
 ```
 

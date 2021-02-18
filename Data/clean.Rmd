@@ -181,7 +181,7 @@ china.fav.tbl <-  tbl_regression(china.fav.lm, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 1: Regression of China Watch Treatment Group Against Favorability Towards China", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
 
 china.fav.lm.news <- lm(Q17_1 ~ Gender + Age + race + Education 
@@ -195,7 +195,7 @@ china.fav.news.tbl <-  tbl_regression(china.fav.lm.news, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 1a: Regression of China Watch Treatment Group and Media Interaction Against Favorability Towards China", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
 china.ppl.lm <- lm(Q22_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -207,7 +207,7 @@ china.ppl.tbl <-  tbl_regression(china.ppl.lm, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 2: Regression of China Watch Treatment Group Against Favorability Towards Chinese Citizens", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
 china.trust.lm <- lm(Q18_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -217,26 +217,15 @@ summary(china.trust.lm)
 china.trust.tbl <-  tbl_regression(china.trust.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Trust Towards China", 
-  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+  tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Perceived Trust of China", 
+  subtitle = "Scale of 1 (Untrustworthy) to 7 (Trustworthy)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20,  n = yyy"))
 
 
 
 ```
 
 ```{r}
-china.trust.lm <- lm(Q18_1 ~ Gender + Age + race + Education 
-                + Party + condition, data = clean_results)
-
-summary(china.trust.lm)
-
-china.trust.tbl <-  tbl_regression(china.trust.lm, intercept = TRUE,
-                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
-  as_gt() %>%
-  tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Trust Towards China", 
-  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
 
 china.influence.lm <- lm(Q19_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -246,9 +235,9 @@ summary(china.influence.lm)
 china.influence.tbl <-  tbl_regression(china.influence.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 4: Regression of China Watch Treatment Group Against Influence Towards China", 
-  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+  tab_header(title = "Tbl. 4: Regression of China Watch Treatment Group Against Perceived Influence of China", 
+  subtitle = "Scale of 0 (Not at all influential) to 10 (Extremly influential)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
 china.threat.lm <- lm(Q20 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -258,9 +247,10 @@ summary(china.threat.lm)
 china.threat.tbl <-  tbl_regression(china.threat.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 5: Regression of China Watch Treatment Group Against Belief that China is a Threat", 
-  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+  tab_header(title = "Tbl. 5: Regression of China Watch Treatment Group Against Belief that China is a 
+             Threat to the United States", 
+  subtitle = "Scale of 0 (Not an important threat at all) to 2 (Critical threat)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
 article.trust.lm <- lm(Q40_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -270,9 +260,25 @@ summary(article.trust.lm)
 article.trust.tbl <-  tbl_regression(article.trust.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 6: Regression of China Watch Treatment Group Against Trust Towards Treatment Article", 
-  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+  tab_header(title = "Tbl. 6: Regression of China Watch Treatment Group Against 
+             Trust in Accuracy of Treatment Article", 
+  subtitle = "Scale of 1 (No trust) to 7 (Complete trust)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+
+
+article.trust.news.lm <- lm(Q40_1 ~ Gender + Age + race + Education 
+                + Party + condition + mediatrust + newsinterest + time_spent_news
+                + newsconspiracy + newssource, data = clean_results)
+
+summary(article.trust.news.lm)
+
+article.trust.news.tbl <-  tbl_regression(article.trust.news.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 6a: Regression of China Watch Treatment Group and Media Interaction Against
+             Trust in Accuracy of Treatment Article", 
+  subtitle = "Scale of 1 (No trust) to 7 (Complete trust)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
 article.convincing.lm <- lm(Q41_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -282,9 +288,24 @@ summary(article.convincing.lm)
 article.convincing.tbl <-  tbl_regression(article.convincing.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 7: Regression of China Watch Treatment Group Against Convincement Towards Treatment Article", 
-  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+  tab_header(title = "Tbl. 7: Regression of China Watch Treatment Group Against 
+             How Convinced Participants were of their Treatment Article", 
+  subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+
+article.convincing.news.lm <- lm(Q41_1 ~ Gender + Age + race + Education 
+                + Party + condition + mediatrust + newsinterest + time_spent_news
+                + newsconspiracy + newssource, data = clean_results)
+
+summary(article.convincing.news.lm)
+
+article.convincing.news.tbl <-  tbl_regression(article.convincing.news.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 7a: Regression of China Watch Treatment Group and Media Interaction Against 
+             How Convinced Participants were of their Treatment Article", 
+  subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
 
 china.trade.glm <- lm(Q21_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -294,8 +315,125 @@ summary(china.trade.glm)
 china.trade.tbl <-  tbl_regression(china.trade.glm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 8: Regression of China Watch Treatment Group Against Trade Policy Preference", 
-  subtitle = "0 = Not an important threat; 2 = Critical threat") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted Feb. 1-20, 2021"))
+  tab_header(title = "Tbl. 8: Logistic Regression of China Watch Treatment Group Against 
+             Policy Preference regarding Trade Tariffs", 
+  subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+
+china.hrights.glm <- lm(Q21_3 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.hrights.glm)
+
+```
+
+```{r}
+china.research.glm <- lm(Q21_2 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.research.glm)
+
+china.research.tbl <-  tbl_regression(china.research.glm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 9: Regression of China Watch Treatment Group Against 
+  Policy Preference regarding Restricting US-China Scientific Exchange", 
+  subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+
+
+china.research.news.glm <- lm(Q21_2 ~ Gender + Age + race + Education 
+                + Party + condition + mediatrust + newsinterest + time_spent_news
+                + newsconspiracy + newssource, data = clean_results)
+
+summary(china.research.news.glm)
+
+china.research.news.tbl <-  tbl_regression(china.research.news.glm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 9a: Regression of China Watch Treatment Group and Media Interaction Against 
+             Policy Preference regarding Restricting US-China Scientific Exchange", 
+  subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+
+china.students.glm <- lm(Q21_4 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.students.glm)
+
+china.dvlpment.glm <- lm(Q21_5 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.dvlpment.glm)
+
+china.military.glm <- lm(Q21_6 ~ Gender + Age + race + Education 
+                + Party + condition, data = clean_results)
+
+summary(china.military.glm)
+
+
+
+source_id_graph <- clean_results %>%
+  filter(Q39 %in% c("China Daily", "Fox News", "Not sure", "The New York Times", "People.cn (China's People's Daily)", "Facebook News")) %>%
+ggplot(aes(x = Q39, fill = condition)) +
+  geom_bar(na.rm = TRUE) +
+  scale_fill_discrete(name = "Treatment", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("China Daily", "Fox News",
+                         "Not sure", "People's Daily", "New York Times")) +
+  labs(title = "Participant Identification of Authoring Media Source",
+       subtitle = "Legend indicates the treatment participants actually received; CW = China Watch treatment",
+       x = "Participants' Source ID",
+       y = "Count",
+       source = "Original DLABBS & MTurk study, conducted 2021 Feb. 1-20, n = yyy") +
+  theme_bw()
+```
+
+
+```{r}
+chineseamericans.economic.lm <- lm(Q34 ~ Gender + Age + race + Education 
+                + Party + xicondition, data = clean_results)
+
+summary(chineseamericans.economic.lm)
+
+chineseamericans.economic.tbl <-  tbl_regression(chineseamericans.economic.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 10: Regression of Xi Quote Treatment Against Economic Threat posed by Chinese Americans", 
+  subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
+  to 1 (Chinese Americans are more likely to support the U.S.)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+
+chineseamericans.military.lm <- lm(Q42 ~ Gender + Age + race + Education 
+                + Party + xicondition, data = clean_results)
+
+summary(chineseamericans.military.lm)
+
+chineseamericans.military.tbl <-  tbl_regression(chineseamericans.military.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 11: Regression of Xi Quote Treatment Against Military Threat posed by Chinese Americans", 
+  subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
+  to 1 (Chinese Americans are more likely to support the U.S.)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+
+
+chineseamericans.military.news.lm <- lm(Q42 ~ Gender + Age + race + Education 
+                + Party + xicondition + mediatrust + newsinterest + time_spent_news
+                + newsconspiracy + newssource, data = clean_results)
+
+summary(chineseamericans.military.news.lm)
+
+chineseamericans.economic.news.lm <- lm(Q34 ~ Gender + Age + race + Education 
+                + Party + xicondition + mediatrust + newsinterest + time_spent_news
+                + newsconspiracy + newssource, data = clean_results)
+
+summary(chineseamericans.economic.news.lm)
+
+chineseamericans.securityrisk.lm <- lm(Q35 ~ Gender + Age + race + Education 
+                + Party + xicondition, data = clean_results)
+
+summary(chineseamericans.securityrisk.lm)
+
 ```
 

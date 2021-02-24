@@ -1,0 +1,337 @@
+---
+title: "party_split"
+author: "Joshua Berry"
+date: "2/23/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(GGally)
+library(knitr)
+library(gtsummary)
+library(gt)
+library(rstatix)
+```
+
+## R Markdown
+
+```{r}
+results <- read_csv("china_watch_combined.csv",
+                    col_types = cols(Q17_1 = col_number(),
+                                     Q18_1 = col_number(),
+                                     Q19_1 = col_number(),
+                                     Q22_1 = col_number(),
+                                     Q40_1 = col_number(),
+                                     Q41_1 = col_number(),
+                                     Age = col_number()))
+
+clean_results <- results %>%
+  rename(race = Q92_1, ethnicity = Q92_2) %>%
+   mutate(Q20 = case_when(Q20 == "Critical threat" ~ 2,
+                                     Q20 == "Important but not critical threat" ~ 1,
+                                     Q20 == "Not an important threat at all" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+     mutate(Q21_1 = case_when(Q21_1 == "Support" ~ 1,
+                                     Q21_1 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q21_2 = case_when(Q21_2 == "Support" ~ 1,
+                                     Q21_2 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q21_3 = case_when(Q21_3 == "Support" ~ 1,
+                                     Q21_3 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q21_4 = case_when(Q21_4 == "Support" ~ 1,
+                                     Q21_4 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+     mutate(Q21_5 = case_when(Q21_5 == "Support" ~ 1,
+                                     Q21_5 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+     mutate(Q21_6 = case_when(Q21_6 == "Support" ~ 1,
+                                     Q21_6 == "Oppose" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+ mutate(Q25 = case_when(Q25 == "0 hours" ~ 0,
+                                     Q25 == "Less than 30 minutes" ~ 30,
+                                     Q25 == "30-60 minutes" ~ 60,
+                                     Q25 == "1-2 hours" ~ 120,
+                                     Q25 == "More than 2 hours" ~ 150,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q26 = case_when(Q26 == "No familiarity" ~ 1,
+                                     Q26 == "Low familiarity with the news" ~ 2,
+                                     Q26 == "Average familiarity with the news" ~ 3,
+                                     Q26 == "High familiarity with the news" ~ 4,
+                                     Q26 == "Complete familiarity with the news" ~ 5,
+                                     TRUE ~ NA_real_)) %>%
+   mutate(Q27 = case_when(Q27 == "Never" ~ 1,
+                                     Q27 == "Sometimes" ~ 2,
+                                     Q27 == "About half the time" ~ 3,
+                                     Q27 == "Most of the time" ~ 4,
+                                     Q27 == "Always" ~ 5,
+                                     TRUE ~ NA_real_)) %>%
+    mutate(Q28 = case_when(Q28 == "Totally disagree" ~ 1,
+                                     Q28 == "Somewhat disagree" ~ 2,
+                                     Q28 == "Neither agree nor disagree" ~ 3,
+                                     Q28 == "Somewhat agree" ~ 4,
+                                     Q28 == "Totally agree" ~ 5,
+                                     TRUE ~ NA_real_)) %>%
+      mutate(Q44 = case_when(Q44 == "Not at all" ~ 1,
+                                     Q44 == "Not very well" ~ 2,
+                                     Q44 == "Somewhat well" ~ 3,
+                                     Q44 == "Very well" ~ 4,
+                                     Q44 == "Extremely well" ~ 5,
+                                     TRUE ~ NA_real_)) %>%
+   rename(mediatrust = Q27, newsinterest = Q26, time_spent_news = Q25, newsconspiracy = Q44, newssource = Q43) %>%
+           mutate(newssource = case_when(newssource == "Cable TV news broadcasts (For example: CNN, Fox News, or MSNBC)" ~ "Cable TV",
+                                     newssource == "Blogs and other websites" ~ "Blogs and websites",
+                                     newssource == "Facebook, Twitter and other social media" ~ "Social media",
+                                     newssource == "Network TV news broadcasts (For example: ABC, CBS, or NBC)" ~ "Network TV",
+                                     newssource == "Newspapers and news magazines" ~ "Newspapers and news magazines",
+                                     newssource == "Radio" ~ "Radio",
+                                     TRUE ~ NA_character_)) %>%
+        mutate(Q34 = case_when(Q34 == "Not sure" ~ 0,
+                                     Q34 == "More likely to support China" ~ -1,
+                                     Q34 == "More likely to support the U.S." ~ 1,
+                                     TRUE ~ NA_real_)) %>%
+          mutate(Q42 = case_when(Q42 == "Not sure" ~ 0,
+                                     Q42 == "More likely to support China" ~ -1,
+                                     Q42 == "More likely to support the U.S." ~ 1,
+                                     TRUE ~ NA_real_)) %>%
+            mutate(Q35 = case_when(Q35 == "Yes" ~ -1,
+                                     Q35 == "No" ~ 1,
+                                     Q35 == "Not sure" ~ 0,
+                                     TRUE ~ NA_real_)) %>%
+              mutate(Education = case_when(Education == "Some high school" ~ 0,
+                                     Education == "Less than high school degree" ~ 0,
+                                     Education == "High school graduate" ~ 4,
+                                     Education == "High school graduate (high school diploma or equivalent including GED)" ~ 4,
+                                     Education == "B.A. or B.S." ~ 10,
+                                     Education == "Bachelor's degree in college (4-year)" ~ 10,
+                                     Education == "Associate's Degree" ~ 7,
+                                     Education == "Associate degree in college (2-year)" ~ 7,
+                                     Education == "Master's" ~ 12,
+                                     Education == "Master's degree" ~ 12,
+                                     Education == "Ph.D." ~ 17,
+                                     Education == "M.D." ~ 17,
+                                     Education == "Doctoral degree" ~ 17,
+                                     TRUE ~ NA_real_)) %>%
+                mutate(Gender = case_when(Gender == "Male" ~ "Male",
+                                     Gender == "Female" ~ "Female",
+                                     Gender == "Other" ~ "Other",
+                                     TRUE ~ NA_character_)) %>%
+                  mutate(Party = case_when(Party == "Republican" ~ "Republican",
+                                     Party == "Democrat" ~ "Democrat",
+                                     Party == "Other" ~ "Independent",
+                                     Party == "Independent" ~ "Independent",
+                                     TRUE ~ NA_character_)) %>%
+                    mutate(Salary = case_when(Salary == "$90,000-$99,999" ~ 99999,
+                                     Salary == "$35,000-$39,999" ~ 39999,
+                                     Salary == "$22,000-$24,999" ~ 24999,
+                                     Salary == "$75,000-$89,999" ~ 89999,
+                                     Salary == "$45,000-$49,999" ~ 49999,
+                                     Salary == "$60,000-$74,999" ~ 74999,
+                                     Salary == "$135,000-$149,999" ~ 149999,
+                                     Salary == "$50,000-$59,999" ~ 59999,
+                                     Salary == "$100,000-$109,999" ~ 109999,
+                                     Salary == "$15,000-$16,999" ~ 16999,
+                                     Salary == "$60,000-$74,999" ~ 74999,
+                                     Salary == "$30,000-$34,999" ~ 34999,
+                                     Salary == "$17,000-$19,999" ~ 19999,
+                                     Salary == "$120,000-$134,999" ~ 134999,
+                                     Salary == "$110,000-$119,999" ~ 119999,
+                                     Salary == "$150,000 and over" ~ 200000,
+                                      Salary == "$40,000-$44,999" ~ 44999,
+                                     Salary == "None or less than $2,999" ~ 2999,
+                                     Salary == "$5,000 -$7,499" ~ 7499,
+                                     Salary == "$100,000 to $149,999" ~ 149999,
+                                     Salary == "$150,000 or more" ~ 200000,
+                                     Salary == "$10,000 to $49,999" ~ 49999,
+                                     Salary == "$50,000 to $74,999" ~ 74999,
+                                     Salary == "Less than $10,000" ~ 10000,
+                                     Salary == "$75,000 to $99,999" ~ 99999,
+                                     TRUE ~ NA_real_)) %>%
+                     mutate(race = case_when(race == "Asian" ~ "Asian",
+                                     race == "Black" ~ "Black",
+                                     race == "Hispanic" ~ "Hispanic",
+                                     race == "Hispanic or Latino" ~ "Hispanic",
+                                     race == "Other" ~ "Other",
+                                     race == "White" ~ "White",
+                                     race == "White,Asian" ~ "Other",
+                                     race == "White,Black,Asian" ~ "Other",
+                                     TRUE ~ NA_character_)) 
+
+clean_results$condition <- factor(clean_results$condition, levels = c("peoplesdaily", "nytbase", "nytcw", "foxcw", "facebookcw"))
+
+clean_results$race<- factor(clean_results$race, levels = c("Black", "Asian", "White", "Hispanic", "Other"))
+
+clean_results$xicondition <- factor(clean_results$xicondition, levels = c("party", "children"))
+
+mean(clean_results$Age, na.rm = TRUE)
+
+democrat_results <-
+  clean_results %>%
+  filter(Party == "Democrat")
+
+gop_ind_results <-
+  clean_results %>%
+  filter(Party == "Republican" | Party == "Independent")
+
+ind_results <-
+  clean_results %>%
+  filter(Party == "Independent")
+         
+
+gop_results <-
+  clean_results %>%
+  filter(Party == "Republican")
+```
+
+
+```{r}
+dem.china.fav.lm <- lm(Q17_1 ~ Gender + Age + race + Education 
+                + condition, data = democrat_results)
+
+summary(dem.china.fav.lm)
+
+gop.china.fav.lm <- lm(Q17_1 ~ Gender + Age + race + Education 
+                + condition, data = gop_results)
+
+summary(gop.china.fav.lm)
+
+ind.china.fav.lm <- lm(Q17_1 ~ Gender + Age + race + Education 
+                + condition, data = ind_results)
+
+summary(ind.china.fav.lm)
+
+
+gop.ind.china.fav.lm <- lm(Q17_1 ~ Gender + Age + race + Education 
+                + condition, data = gop_ind_results)
+
+summary(gop.ind.china.fav.lm)
+
+dem.china.fav.tbl <-  tbl_regression(dem.china.fav.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. X: Regression of China Watch Treatment Group Against Democrats' Favorability Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
+
+gop.china.fav.tbl <-  tbl_regression(gop.china.fav.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. X: Regression of China Watch Treatment Group Against Republicans' Favorability Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
+
+ind.china.fav.tbl <-  tbl_regression(ind.china.fav.lm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. X: Regression of China Watch Treatment Group Against Independents' Favorability Towards China", 
+  subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
+
+
+```
+
+
+```{r}
+
+dem_mean_china_fav <-
+  democrat_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_fav = mean(Q17_1, na.rm = TRUE),
+            sd = sd(Q17_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_fav - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_fav + qt(1 - (0.05 / 2), n - 1) * se)
+
+
+dem_fav_graph <-
+  dem_mean_china_fav %>%
+  drop_na(condition) %>%
+ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 100) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 1: The Effect of Media Treatment on Democratic Favorability Towards China",
+       subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
+       x = "Treatment Group",
+       y = "Mean Favorability towards China",
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
+  theme_bw()
+
+```
+
+
+```{r}
+
+gop_mean_china_fav <-
+  gop_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_fav = mean(Q17_1, na.rm = TRUE),
+            sd = sd(Q17_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_fav - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_fav + qt(1 - (0.05 / 2), n - 1) * se)
+
+
+gop_fav_graph <-
+  gop_mean_china_fav %>%
+  drop_na(condition) %>%
+ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 100) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 1: The Effect of Media Treatment on Republican Favorability Towards China",
+       subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
+       x = "Treatment Group",
+       y = "Mean Favorability towards China",
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
+  theme_bw()
+
+```
+
+```{r}
+ind_mean_china_fav <-
+  ind_results %>%
+  group_by(condition) %>%
+  summarize(mean_china_fav = mean(Q17_1, na.rm = TRUE),
+            sd = sd(Q17_1, na.rm = TRUE),
+            n = n()) %>%
+  mutate(se = sd / sqrt(n),
+         lower.ci = mean_china_fav - qt(1 - (0.05 / 2), n - 1) * se,
+         upper.ci = mean_china_fav + qt(1 - (0.05 / 2), n - 1) * se)
+
+
+ind_fav_graph <-
+  ind_mean_china_fav %>%
+  drop_na(condition) %>%
+ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
+  geom_col(position=position_dodge()) +
+  geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
+                width = .2) + 
+  ylim(0, 100) +
+  scale_fill_discrete(name = "Condition", labels = c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  scale_x_discrete(labels=c("People's Daily", "NYT Base",
+                         "NYT CW", "Fox CW", "Facebook CW")) +
+  labs(title = "Fig. 1: The Effect of Media Treatment on Republican Favorability Towards China",
+       subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
+       x = "Treatment Group",
+       y = "Mean Favorability towards China",
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
+  theme_bw()
+```
+

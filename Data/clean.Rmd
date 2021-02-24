@@ -181,7 +181,7 @@ china.fav.tbl <-  tbl_regression(china.fav.lm, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 1: Regression of China Watch Treatment Group Against Favorability Towards China", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 
 china.fav.lm.news <- lm(Q17_1 ~ Gender + Age + race + Education 
@@ -195,7 +195,7 @@ china.fav.news.tbl <-  tbl_regression(china.fav.lm.news, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 1a: Regression of China Watch Treatment Group and Media Interaction Against Favorability Towards China", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 china.ppl.lm <- lm(Q22_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -207,7 +207,7 @@ china.ppl.tbl <-  tbl_regression(china.ppl.lm, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 2: Regression of China Watch Treatment Group Against Favorability Towards Chinese Citizens", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 china.trust.lm <- lm(Q18_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -219,7 +219,7 @@ china.trust.tbl <-  tbl_regression(china.trust.lm, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Perceived Trust of China", 
   subtitle = "Scale of 1 (Untrustworthy) to 7 (Trustworthy)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20,  n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20,  n = 417"))
 
 
 
@@ -237,7 +237,7 @@ china.influence.tbl <-  tbl_regression(china.influence.lm, intercept = TRUE,
   as_gt() %>%
   tab_header(title = "Tbl. 4: Regression of China Watch Treatment Group Against Perceived Influence of China", 
   subtitle = "Scale of 0 (Not at all influential) to 10 (Extremly influential)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 china.threat.lm <- lm(Q20 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -250,7 +250,7 @@ china.threat.tbl <-  tbl_regression(china.threat.lm, intercept = TRUE,
   tab_header(title = "Tbl. 5: Regression of China Watch Treatment Group Against Belief that China is a 
              Threat to the United States", 
   subtitle = "Scale of 0 (Not an important threat at all) to 2 (Critical threat)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 article.trust.lm <- lm(Q40_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -263,7 +263,7 @@ article.trust.tbl <-  tbl_regression(article.trust.lm, intercept = TRUE,
   tab_header(title = "Tbl. 6: Regression of China Watch Treatment Group Against 
              Trust in Accuracy of Treatment Article", 
   subtitle = "Scale of 1 (No trust) to 7 (Complete trust)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 
 article.trust.news.lm <- lm(Q40_1 ~ Gender + Age + race + Education 
@@ -278,7 +278,7 @@ article.trust.news.tbl <-  tbl_regression(article.trust.news.lm, intercept = TRU
   tab_header(title = "Tbl. 6a: Regression of China Watch Treatment Group and Media Interaction Against
              Trust in Accuracy of Treatment Article", 
   subtitle = "Scale of 1 (No trust) to 7 (Complete trust)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 article.convincing.lm <- lm(Q41_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -291,7 +291,7 @@ article.convincing.tbl <-  tbl_regression(article.convincing.lm, intercept = TRU
   tab_header(title = "Tbl. 7: Regression of China Watch Treatment Group Against 
              How Convinced Participants were by their Treatment Article", 
   subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 article.convincing.news.lm <- lm(Q41_1 ~ Gender + Age + race + Education 
                 + Party + condition + mediatrust + newsinterest + time_spent_news
@@ -305,9 +305,9 @@ article.convincing.news.tbl <-  tbl_regression(article.convincing.news.lm, inter
   tab_header(title = "Tbl. 7a: Regression of China Watch Treatment Group and Media Interaction Against 
              How Convinced Participants were of their Treatment Article", 
   subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
-china.trade.glm <- lm(Q21_1 ~ Gender + Age + race + Education 
+china.trade.glm <- glm(Q21_1 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
 
 summary(china.trade.glm)
@@ -318,9 +318,9 @@ china.trade.tbl <-  tbl_regression(china.trade.glm, intercept = TRUE,
   tab_header(title = "Tbl. 8: Logistic Regression of China Watch Treatment Group Against 
              Policy Preference regarding Trade Tariffs", 
   subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
-china.hrights.glm <- lm(Q21_3 ~ Gender + Age + race + Education 
+china.hrights.glm <- glm(Q21_3 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
 
 summary(china.hrights.glm)
@@ -328,7 +328,7 @@ summary(china.hrights.glm)
 ```
 
 ```{r}
-china.research.glm <- lm(Q21_2 ~ Gender + Age + race + Education 
+china.research.glm <- glm(Q21_2 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
 
 summary(china.research.glm)
@@ -336,13 +336,13 @@ summary(china.research.glm)
 china.research.tbl <-  tbl_regression(china.research.glm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 9: Regression of China Watch Treatment Group Against 
+  tab_header(title = "Tbl. 9: Logistic Regression of China Watch Treatment Group Against 
   Policy Preference regarding Restricting US-China Scientific Exchange", 
   subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 
-china.research.news.glm <- lm(Q21_2 ~ Gender + Age + race + Education 
+china.research.news.glm <- glm(Q21_2 ~ Gender + Age + race + Education 
                 + Party + condition + mediatrust + newsinterest + time_spent_news
                 + newsconspiracy + newssource, data = clean_results)
 
@@ -354,19 +354,19 @@ china.research.news.tbl <-  tbl_regression(china.research.news.glm, intercept = 
   tab_header(title = "Tbl. 9a: Regression of China Watch Treatment Group and Media Interaction Against 
              Policy Preference regarding Restricting US-China Scientific Exchange", 
   subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
-china.students.glm <- lm(Q21_4 ~ Gender + Age + race + Education 
+china.students.glm <- glm(Q21_4 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
 
 summary(china.students.glm)
 
-china.dvlpment.glm <- lm(Q21_5 ~ Gender + Age + race + Education 
+china.dvlpment.glm <- glm(Q21_5 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
 
 summary(china.dvlpment.glm)
 
-china.military.glm <- lm(Q21_6 ~ Gender + Age + race + Education 
+china.military.glm <- glm(Q21_6 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
 
 summary(china.military.glm)
@@ -388,7 +388,7 @@ chineseamericans.economic.tbl <-  tbl_regression(chineseamericans.economic.lm, i
              Perceived Economic Threat of Chinese American Fifth Column", 
   subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
   to 1 (Chinese Americans are more likely to support the U.S.)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 chineseamericans.military.lm <- lm(Q42 ~ Gender + Age + race + Education 
                 + Party + xicondition, data = clean_results)
@@ -402,7 +402,7 @@ chineseamericans.military.tbl <-  tbl_regression(chineseamericans.military.lm, i
              Perceived Military Threat of Chinese American Fifth Column", 
   subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
   to 1 (Chinese Americans are more likely to support the U.S.)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = yyy"))
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 
 chineseamericans.military.news.lm <- lm(Q42 ~ Gender + Age + race + Education 
@@ -432,12 +432,12 @@ ggplot(aes(x = Q39, fill = condition)) +
   scale_fill_discrete(name = "Treatment", labels = c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("China Daily", "Fox News",
-                         "Not sure", "People's Daily", "New York Times")) +
+                         "Not sure", "People's Daily", "New York Times", "Facebook News")) +
   labs(title = "Participant Identification of Authoring Media Source",
        subtitle = "Legend indicates the treatment participants actually received; CW = China Watch treatment",
        x = "Participants' Source ID",
        y = "Count",
-       source = "Original DLABBS & MTurk study, conducted 2021 Feb. 1-20, n = yyy") +
+       source = "Original DLABBS & MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 
 mean_china_fav <-
@@ -453,6 +453,7 @@ mean_china_fav <-
 
 china_fav_graph <-
   mean_china_fav %>%
+  drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -466,8 +467,8 @@ ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
        subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
        x = "Treatment Group",
        y = "Mean Favorability towards China",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
-  theme_bw()
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
+  theme_bw() 
 
 mean_china_ppl_fav <-
   clean_results %>%
@@ -481,6 +482,7 @@ mean_china_ppl_fav <-
 
 china_fav_ppl_graph <-
   mean_china_ppl_fav %>%
+    drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_china_ppl_fav, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -494,7 +496,7 @@ ggplot(aes(x = condition, y = mean_china_ppl_fav, fill = condition)) +
        subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
        x = "Treatment Group",
        y = "Mean Favorability towards Chinese People",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 ```
 
@@ -511,6 +513,7 @@ mean_china_trust_fav <-
 
 china_trust_graph <-
   mean_china_trust_fav %>%
+    drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_china_trust_fav, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -524,7 +527,7 @@ ggplot(aes(x = condition, y = mean_china_trust_fav, fill = condition)) +
        subtitle = "Scale of 1 (Untrustworthy) to 7 (Trustworthy)",
        x = "Treatment Group",
        y = "Mean Trust",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 
 mean_china_influence <-
@@ -539,6 +542,7 @@ mean_china_influence <-
 
 china_influence_graph <-
   mean_china_influence %>%
+    drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_china_influence, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -552,7 +556,7 @@ ggplot(aes(x = condition, y = mean_china_influence, fill = condition)) +
        subtitle = "Scale of 0 (Not at all influential) to 10 (Extremly influential)",
        x = "Treatment Group",
        y = "Mean Influence Rating",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 ```
 
@@ -569,6 +573,7 @@ mean_china_threat <-
 
 china_threat_graph <-
   mean_china_threat %>%
+    drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_china_threat, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -583,7 +588,7 @@ ggplot(aes(x = condition, y = mean_china_threat, fill = condition)) +
        subtitle = "Scale of 0 (Not an important threat at all) to 2 (Critical threat)",
        x = "Treatment Group",
        y = "Mean Threat Rating",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 
 mean_article_trust <-
@@ -598,6 +603,7 @@ mean_article_trust <-
 
 article_trust_graph <-
   mean_article_trust %>%
+    drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_article_trust, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -611,7 +617,7 @@ ggplot(aes(x = condition, y = mean_article_trust, fill = condition)) +
        subtitle = "Scale of 1 (No trust) to 7 (Complete trust)",
        x = "Treatment Group",
        y = "Mean Trust",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 
 mean_article_convince <-
@@ -626,6 +632,7 @@ mean_article_convince <-
 
 article_convince_graph <-
   mean_article_convince %>%
+    drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_article_convince, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -640,7 +647,7 @@ ggplot(aes(x = condition, y = mean_article_convince, fill = condition)) +
        subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)",
        x = "Treatment Group",
        y = "Mean Convincement",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 ```
 
@@ -657,6 +664,7 @@ mean_chineseamerican_military <-
 
 chineseamerican_military_graph <-
   mean_chineseamerican_military %>%
+    drop_na(condition) %>%
 ggplot(aes(x = condition, y = mean_chineseamerican_military, fill = condition)) +
   geom_col(position=position_dodge()) +
   geom_errorbar(mapping = aes(x = condition, ymin = lower.ci, ymax = upper.ci),
@@ -672,7 +680,7 @@ ggplot(aes(x = condition, y = mean_chineseamerican_military, fill = condition)) 
   to 1 (Chinese Americans are more likely to support the U.S.)",
        x = "Treatment Group",
        y = "Mean Rating",
-       source = "Original DLABBS and MTurk study, conducted 2/1-2/20") +
+       source = "Original DLABBS and MTurk study, conducted 2021 Feb. 1-20, n = 417") +
   theme_bw()
 ```
 

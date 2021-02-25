@@ -205,7 +205,7 @@ summary(china.ppl.lm)
 china.ppl.tbl <-  tbl_regression(china.ppl.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 2: Regression of China Watch Treatment Group Against Favorability Towards Chinese Citizens", 
+  tab_header(title = "Tbl. x: Regression of China Watch Treatment Group Against Favorability Towards Chinese Citizens", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
@@ -217,7 +217,7 @@ summary(china.trust.lm)
 china.trust.tbl <-  tbl_regression(china.trust.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Perceived Trust of China", 
+  tab_header(title = "Tbl. 9: Regression of China Watch Treatment Group Against Perceived Trust of China", 
   subtitle = "Scale of 1 (Untrustworthy) to 7 (Trustworthy)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20,  n = 417"))
 
@@ -235,7 +235,7 @@ summary(china.influence.lm)
 china.influence.tbl <-  tbl_regression(china.influence.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 4: Regression of China Watch Treatment Group Against Perceived Influence of China", 
+  tab_header(title = "Tbl. 3: Regression of China Watch Treatment Group Against Perceived Influence of China", 
   subtitle = "Scale of 0 (Not at all influential) to 10 (Extremly influential)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
@@ -247,7 +247,7 @@ summary(china.threat.lm)
 china.threat.tbl <-  tbl_regression(china.threat.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 5: Regression of China Watch Treatment Group Against Belief that China is a 
+  tab_header(title = "Tbl. 4: Regression of China Watch Treatment Group Against Belief that China is a 
              Threat to the United States", 
   subtitle = "Scale of 0 (Not an important threat at all) to 2 (Critical threat)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
@@ -260,7 +260,7 @@ summary(article.trust.lm)
 article.trust.tbl <-  tbl_regression(article.trust.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 6: Regression of China Watch Treatment Group Against 
+  tab_header(title = "Tbl. 5: Regression of China Watch Treatment Group Against 
              Trust in Accuracy of Treatment Article", 
   subtitle = "Scale of 1 (No trust) to 7 (Complete trust)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
@@ -275,7 +275,7 @@ summary(article.trust.news.lm)
 article.trust.news.tbl <-  tbl_regression(article.trust.news.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 6a: Regression of China Watch Treatment Group and Media Interaction Against
+  tab_header(title = "Tbl. 5a: Regression of China Watch Treatment Group and Media Interaction Against
              Trust in Accuracy of Treatment Article", 
   subtitle = "Scale of 1 (No trust) to 7 (Complete trust)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
@@ -288,7 +288,7 @@ summary(article.convincing.lm)
 article.convincing.tbl <-  tbl_regression(article.convincing.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 7: Regression of China Watch Treatment Group Against 
+  tab_header(title = "Tbl. 6: Regression of China Watch Treatment Group Against 
              How Convinced Participants were by their Treatment Article", 
   subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
@@ -302,7 +302,7 @@ summary(article.convincing.news.lm)
 article.convincing.news.tbl <-  tbl_regression(article.convincing.news.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 7a: Regression of China Watch Treatment Group and Media Interaction Against 
+  tab_header(title = "Tbl. 6a: Regression of China Watch Treatment Group and Media Interaction Against 
              How Convinced Participants were of their Treatment Article", 
   subtitle = "Scale of 1 (Not convincing at all) to 7 (Very convincing)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
@@ -315,7 +315,7 @@ summary(china.trade.glm)
 china.trade.tbl <-  tbl_regression(china.trade.glm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 8: Logistic Regression of China Watch Treatment Group Against 
+  tab_header(title = "Tbl. 7: Logistic Regression of China Watch Treatment Group Against 
              Policy Preference regarding Trade Tariffs", 
   subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
@@ -333,13 +333,6 @@ china.research.glm <- glm(Q21_2 ~ Gender + Age + race + Education
 
 summary(china.research.glm)
 
-china.research.tbl <-  tbl_regression(china.research.glm, intercept = TRUE,
-                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
-  as_gt() %>%
-  tab_header(title = "Tbl. 9: Logistic Regression of China Watch Treatment Group Against 
-  Policy Preference regarding Restricting US-China Scientific Exchange", 
-  subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
-    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 
 china.research.news.glm <- glm(Q21_2 ~ Gender + Age + race + Education 
@@ -348,11 +341,17 @@ china.research.news.glm <- glm(Q21_2 ~ Gender + Age + race + Education
 
 summary(china.research.news.glm)
 
-china.research.news.tbl <-  tbl_regression(china.research.news.glm, intercept = TRUE,
+news.china.students.glm <- glm(Q21_4 ~ Gender + Age + race + Education 
+                + Party + condition + + mediatrust + newsinterest + time_spent_news
+                + newsconspiracy + newssource, data = clean_results)
+
+summary(news.china.students.glm)
+
+china.students.news.tbl <-  tbl_regression(news.china.students.glm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. 9a: Regression of China Watch Treatment Group and Media Interaction Against 
-             Policy Preference regarding Restricting US-China Scientific Exchange", 
+  tab_header(title = "Tbl. 8a: Regression of China Watch Treatment Group and Media Interaction Against 
+             Policy Preference regarding Restricting Chinese Students Studying Abroad in the U.S.", 
   subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
@@ -360,6 +359,14 @@ china.students.glm <- glm(Q21_4 ~ Gender + Age + race + Education
                 + Party + condition, data = clean_results)
 
 summary(china.students.glm)
+
+china.students.tbl <-  tbl_regression(china.students.glm, intercept = TRUE,
+                 estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
+  as_gt() %>%
+  tab_header(title = "Tbl. 8: Logistic Regression of China Watch Treatment Group Against 
+  Policy Preference regarding Restricting Chinese Students Studying Abroad in the U.S.", 
+  subtitle = "Scale of 0 (Oppose) to 1 (Support)") %>%
+    tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 china.dvlpment.glm <- glm(Q21_5 ~ Gender + Age + race + Education 
                 + Party + condition, data = clean_results)
@@ -433,7 +440,7 @@ ggplot(aes(x = Q39, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("China Daily", "Fox News",
                          "Not sure", "People's Daily", "New York Times", "Facebook News")) +
-  labs(title = "Participant Identification of Authoring Media Source",
+  labs(title = "Fig. 12: Participant Identification of Authoring Media Source",
        subtitle = "Legend indicates the treatment participants actually received; CW = China Watch treatment",
        x = "Participants' Source ID",
        y = "Count",
@@ -492,7 +499,7 @@ ggplot(aes(x = condition, y = mean_china_ppl_fav, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 2: The Effect of Media Treatment on Favorability Towards Chinese People",
+  labs(title = "Fig. 9: The Effect of Media Treatment on Favorability Towards Chinese People",
        subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
        x = "Treatment Group",
        y = "Mean Favorability towards Chinese People",
@@ -523,7 +530,7 @@ ggplot(aes(x = condition, y = mean_china_trust_fav, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 3: The Effect of Media Treatment on Perceived Trust of China",
+  labs(title = "Fig. 2: The Effect of Media Treatment on Perceived Trust of China",
        subtitle = "Scale of 1 (Untrustworthy) to 7 (Trustworthy)",
        x = "Treatment Group",
        y = "Mean Trust",
@@ -552,7 +559,7 @@ ggplot(aes(x = condition, y = mean_china_influence, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 4: The Effect of Media Treatment on Perceived Influence of China",
+  labs(title = "Fig. 3: The Effect of Media Treatment on Perceived Influence of China",
        subtitle = "Scale of 0 (Not at all influential) to 10 (Extremly influential)",
        x = "Treatment Group",
        y = "Mean Influence Rating",
@@ -583,7 +590,7 @@ ggplot(aes(x = condition, y = mean_china_threat, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 5: The Effect of Media Treatment on Belief that China is a 
+  labs(title = "Fig. 4: The Effect of Media Treatment on Belief that China is a 
              Threat to the United States",
        subtitle = "Scale of 0 (Not an important threat at all) to 2 (Critical threat)",
        x = "Treatment Group",
@@ -613,7 +620,7 @@ ggplot(aes(x = condition, y = mean_article_trust, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 6: The Effect of Media Treatment on Trust in Accuracy of Treatment Article",
+  labs(title = "Fig. 5: The Effect of Media Treatment on Trust in Accuracy of Treatment Article",
        subtitle = "Scale of 1 (No trust) to 7 (Complete trust)",
        x = "Treatment Group",
        y = "Mean Trust",
@@ -674,7 +681,7 @@ ggplot(aes(x = condition, y = mean_chineseamerican_military, fill = condition)) 
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 7: The Effect of Media Treatment on 
+  labs(title = "Fig. 11: The Effect of Media Treatment on 
        Perceived Military Threat of Chinese American Fifth Column",
        subtitle = "Scale of -1 (Chinese Americans are more likely to support China) 
   to 1 (Chinese Americans are more likely to support the U.S.)",

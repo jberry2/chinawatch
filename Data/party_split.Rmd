@@ -212,21 +212,21 @@ summary(gop.ind.china.fav.lm)
 dem.china.fav.tbl <-  tbl_regression(dem.china.fav.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. X: Regression of China Watch Treatment Group Against Democrats' Favorability Towards China", 
+  tab_header(title = "Tbl. 1A: Regression of China Watch Treatment Group Against Democrats' Favorability Towards China", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 gop.china.fav.tbl <-  tbl_regression(gop.china.fav.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. X: Regression of China Watch Treatment Group Against Republicans' Favorability Towards China", 
+  tab_header(title = "Tbl. 1B: Regression of China Watch Treatment Group Against Republicans' Favorability Towards China", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
 ind.china.fav.tbl <-  tbl_regression(ind.china.fav.lm, intercept = TRUE,
                  estimate_fun = function(x) style_sigfig(x, digits = 4)) %>%
   as_gt() %>%
-  tab_header(title = "Tbl. X: Regression of China Watch Treatment Group Against Independents' Favorability Towards China", 
+  tab_header(title = "Tbl. 1C: Regression of China Watch Treatment Group Against Independents' Favorability Towards China", 
   subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)") %>%
     tab_source_note(md("Original DLABBS & MTURK Study, conducted 2021 Feb. 1-20, n = 417"))
 
@@ -259,7 +259,7 @@ ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 1: The Effect of Media Treatment on Democratic Favorability Towards China",
+  labs(title = "Fig. 1A: The Effect of Media Treatment on Democratic Favorability Towards China",
        subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
        x = "Treatment Group",
        y = "Mean Favorability towards China",
@@ -294,7 +294,7 @@ ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 1: The Effect of Media Treatment on Republican Favorability Towards China",
+  labs(title = "Fig. 1B: The Effect of Media Treatment on Republican Favorability Towards China",
        subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
        x = "Treatment Group",
        y = "Mean Favorability towards China",
@@ -327,7 +327,7 @@ ggplot(aes(x = condition, y = mean_china_fav, fill = condition)) +
                          "NYT CW", "Fox CW", "Facebook CW")) +
   scale_x_discrete(labels=c("People's Daily", "NYT Base",
                          "NYT CW", "Fox CW", "Facebook CW")) +
-  labs(title = "Fig. 1: The Effect of Media Treatment on Republican Favorability Towards China",
+  labs(title = "Fig. 1C: The Effect of Media Treatment on Republican Favorability Towards China",
        subtitle = "Feeling Thermometer of 0 (Coldest) to 100 (Warmest)",
        x = "Treatment Group",
        y = "Mean Favorability towards China",
